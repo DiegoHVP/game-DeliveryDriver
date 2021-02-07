@@ -1,10 +1,10 @@
 //SELECAO MENU
 let xo = 365,  yo = 315;//COR MENU RGB
-let L = 10,  S = 100,  D = 200;//Posicao player
+let Red = 10,  Green = 100, Blue  = 200;//Posicao player
 let x = 30,  y = 450;//TELA
 let cena = 0,  aux = -1;//Sprites sem caixa
-let down = [],  up = [],  r = [],  l = [];//Sprites com caixa
-let downc = [],  upc = [],  rc = [],  lc = []//Outros
+let down = [],  up = [],  right = [],  left = [];//Sprites com caixa
+let downc = [],  upc = [],  rightc = [],  leftc = []//Outros
 let bg, player, countframe = 0,  FR = 0,  caixa = 0,  q1 = 0,  ask = 0,  time = 0,  logo,  XP = 12000,  sonsON,  stage = 0,  pontos = [],  x1,  lista = '', Speed = 10, questaoatual;//INSERIR NOME e EFEITO
 let  L2 = 20,  A = 65,  B = 65,  C = 65,  A0 = ' ',  B0 = ' ',  C0 = ' ',  efeito = 0,  efeito0 = 0,  FX,  jogador = []//SOM
 let sons = []/////xi e yi - inimigo posição. dance0 e dance1 - pés do inimigo
@@ -25,14 +25,14 @@ function preload() {
     //PLAYER SEM A CAIXA
     down[i] = loadImage('Player/DOWN0'+i+'.png')
     up[i] = loadImage('Player/UP0'+i+'.png')
-    l[i] = loadImage('Player/LEFT0'+i+'.png')
-    r[i] = loadImage('Player/RIGHT0'+i+'.png')
+    left[i] = loadImage('Player/LEFT0'+i+'.png')
+    right[i] = loadImage('Player/RIGHT0'+i+'.png')
 
     //PLAYER COM A CAIXA
     downc[i] = loadImage('PlayerBox/DOWN0'+i+'.png')
     upc[i] = loadImage('PlayerBox/UP0'+i+'.png')
-    lc[i] = loadImage('PlayerBox/LEFT0'+i+'.png')
-    rc[i] = loadImage('PlayerBox/RIGHT0'+i+'.png')
+    leftc[i] = loadImage('PlayerBox/LEFT0'+i+'.png')
+    rightc[i] = loadImage('PlayerBox/RIGHT0'+i+'.png')
 }
   bg = loadImage('background.png') //FUNDO
   logo = loadImage('logo.png');
@@ -117,14 +117,14 @@ function menu() {
     q1 = 0, x = 30, y = 450, XP = 12000, stage++, caixa = 0, sonsON = undefined, x1 = undefined, sons[3].stop(), sons[5].stop()
 
   //TELA
-  R++, G++,  B++;
-  if (R >= 255)
-    R = random(0, 255);
-  if (G >= 255)
-    G = random(0, 255);
-  if (B >= 255)
-    B = random(0, 255);
-  background(R, G, B);
+  Red++, Green++,  Blue++
+  if (Red >= 255)
+    Red = random(0, 255);
+  if (Green >= 255)
+    Green = random(0, 255);
+  if (Blue >= 255)
+    Blue = random(0, 255);
+  background(Red, Green, Blue);
 
   fill('white');
   stroke('black');
@@ -261,7 +261,7 @@ function keyPressed() {
 }
 function fase1() {
   if (pontos[stage] == undefined)
-    pontos[stage] = 0, player = l[1], caixa = 0, sons[0].stop(), sons[4].setVolume(0.08), sons[4].play(), x1 = undefined, sonsON = undefined, inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 01
+    pontos[stage] = 0, player = left[1], caixa = 0, sons[0].stop(), sons[4].setVolume(0.08), sons[4].play(), x1 = undefined, sonsON = undefined, inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 01
   design0() //DESENHOS, DEFINIÇÕES, CONTADORES
   textSize(18)
   text(': O CAMINHÃO DE BILL GATES ESTA VAZIO, ELE PRECISA DE 5 CAIXAS, VOCÊ\nPODE ENCHER O CAMINHÃO PARA ELE?', 170, 34)
@@ -637,9 +637,9 @@ function base() {
   if (keyCode == 90 && x >= 5 && x <= 195 && y < 360 && caixa == 0) //PEGA CAIXA - DEPOSITO
     caixa = 1, player = upc[1], sons[7].setVolume(0.6), sons[7].play()
   if (keyCode == 90 && x >= 705 && y <= 435 && caixa == 1) //SOLTA CAIXA - CAMINHÃO
-    caixa = 0, q1++, player = r[1], sons[6].setVolume(0.6), sons[6].play()
+    caixa = 0, q1++, player = right[1], sons[6].setVolume(0.6), sons[6].play()
   if (keyCode == 88 && x >= 705 && y <= 435 && caixa == 0 && q1 > 0) //PEGA CAIXA - CAMINHÃO
-    caixa = 1, q1--, player = rc[1], sons[7].play()
+    caixa = 1, q1--, player = rightc[1], sons[7].play()
   if (keyCode == 88 && x >= 5 && x <= 195 && y < 360 && caixa == 1) //SOLTA CAIXA DEPOSITO
     caixa = 0, player = up[1], sons[6].play()
 
@@ -648,17 +648,17 @@ function base() {
     x -= Speed //ESQUERDA COM LIMITE E CONTADOR DE FRAMES
     countframe++
     if (caixa == 0)
-      player = r[FR]
+      player = right[FR]
     if (caixa == 1)
-      player = rc[FR]
+      player = rightc[FR]
   }
   if (keyIsDown(RIGHT_ARROW) && x < 730) {
     x += Speed //DIREITA COM LIMITE E CONTADOR DE FRAMES
     countframe++
     if (caixa == 0)
-      player = l[FR]
+      player = left[FR]
     if (caixa == 1)
-      player = lc[FR]
+      player = leftc[FR]
   }
   if (keyIsDown(UP_ARROW) && y > 350) {
     y -= Speed //SUBINDO COM LIMITE E CONTADOR DE FRAMES
