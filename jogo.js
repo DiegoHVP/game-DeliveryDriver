@@ -12,9 +12,9 @@ let xi = 320,  yi = 500,  vida = 12,  inimigoON = 1,  dance0, dance1 ////ROBOTIM
 let xi0 = 40,  yi0 = 40,  dance, dance11, paint0, paint1 ////ROBOPONTO, 'paint0' e 'paint1' para inserir cor por proximidade
 function preload() {
   soundFormats('ogg');
-  sons[1] = loadSound('sons/theme menu.ogg') //MENU SOUND
+  sons[1] = loadSound('sons/pass.ogg') //MENU SOUND
   sons[2] = loadSound('sons/fx_menu.ogg') //MENU FX
-  sons[0] = loadSound('sons/pass.ogg') //GANHOU FASE
+  sons[0] = loadSound('sons/theme menu.ogg') //GANHOU FASE
   sons[3] = loadSound('sons/game_over.ogg') //GAME OVE
   sons[4] = loadSound('sons/theme.ogg') //MUSICA FASES
   sons[5] = loadSound('sons/win.ogg') //GANHOU JOGO
