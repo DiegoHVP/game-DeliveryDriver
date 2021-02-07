@@ -3,8 +3,7 @@ PS: Pagina para testes
 
 Jogo - Entregador de Mercadorias
 
-Olá pessoa AMAVEL :)
-https://bit.ly/36N79gk
+https://bit.ly/39WKe4c
 
 SONS USADOS:
 UNDERTALE
