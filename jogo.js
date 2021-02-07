@@ -24,13 +24,13 @@ function preload() {
   for(let i=0;i<4;i++){
     //PLAYER SEM A CAIXA
     down[i] = loadImage('Player/DOWN0'+i+'.png')
-    up[i] = loadImage('Player/UP'+i+'.png')
+    up[i] = loadImage('Player/UP0'+i+'.png')
     l[i] = loadImage('Player/LEFT0'+i+'.png')
     r[i] = loadImage('Player/RIGHT0'+i+'.png')
 
     //PLAYER COM A CAIXA
     downc[i] = loadImage('PlayerBox/DOWN0'+i+'.png')
-    upc[i] = loadImage('PlayerBox/UP'+i+'.png')
+    upc[i] = loadImage('PlayerBox/UP0'+i+'.png')
     lc[i] = loadImage('PlayerBox/LEFT0'+i+'.png')
     rc[i] = loadImage('PlayerBox/RIGHT0'+i+'.png')
 }
