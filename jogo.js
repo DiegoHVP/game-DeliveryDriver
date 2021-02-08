@@ -5,10 +5,10 @@ let x = 30,  y = 450;//TELA
 let cena = 0,  aux = -1;//Sprites sem caixa
 let down = [],  up = [],  right = [],  left = [];//Sprites com caixa
 let downc = [],  upc = [],  rightc = [],  leftc = []//Outros
-let bg, player, countframe = 0,  FR = 0,  caixa = 0,  q1 = 0,  ask = 0,  time = 0,  logo,  XP = 12000,  sonsON,  stage = 0,  pontos = [],  x1,  lista = '', Speed = 10, questaoatual;//INSERIR NOME e EFEITO
+let bg, player, countframe = 0,  FR = 0,  caixa = 0,  box = 0,  ask = 0,  time = 0,  logo,  XP = 12000,  sonsON,  stage = 0,  pontos = [],  x1,  lista = '', Speed = 10, questaoatual;//INSERIR NOME e EFEITO
 let  L2 = 20,  A = 65,  B = 65,  C = 65,  A0 = ' ',  B0 = ' ',  C0 = ' ',  efeito = 0,  efeito0 = 0,  FX,  jogador = []//SOM
 let sons = []/////xi e yi - inimigo posição. dance0 e dance1 - pés do inimigo
-let xi = 320,  yi = 500,  vida = 12,  inimigoON = 1,  dance0, dance1 ////ROBOTIME, trocadilho horriveis
+let xi = 320,  yi = 500,  vida = 12,  inimigoON = 1,  dance0, dance1 ////ROBOTIME, trocadilho
 let xi0 = 40,  yi0 = 40,  dance, dance11, paint0, paint1 ////ROBOPONTO, 'paint0' e 'paint1' para inserir cor por proximidade
 function preload() {
   soundFormats('ogg');
@@ -113,8 +113,8 @@ function draw() {
 }
 function menu() {
   //RESTAURAR DADOS
-  if (q1 != 0 || x != 30 || y != 450)
-    q1 = 0, x = 30, y = 450, XP = 12000, stage++, caixa = 0, sonsON = undefined, x1 = undefined, sons[3].stop(), sons[5].stop()
+  if (box != 0 || x != 30 || y != 450)
+    box = 0, x = 30, y = 450, XP = 12000, stage++, caixa = 0, sonsON = undefined, x1 = undefined, sons[3].stop(), sons[5].stop()
 
   //TELA
   Red++, Green++,  Blue++
@@ -243,6 +243,7 @@ function keyPressed() {
       x += 70, sons[2].play()
     if (keyIsDown(LEFT_ARROW) && x > 326) //MOVER QUADRO ESQUERDA
       x -= 70, sons[2].play()
+
     if (x == 326 && keyCode <= 90 && keyCode >= 65) //PRIMEIRO QUADRO, INSERIR LETRA
       A = keyCode, A0 = String.fromCharCode(A)
     if (x == 326 && keyCode == 8) //PRIMEIRO QUADRO, APAGAR LETRA
@@ -276,16 +277,17 @@ function fase1() {
 
 
   //RESOLUÇÃO DA QUESTÃO
-  if (keyCode == 32)
-    if (q1 == 5) {
+  if (keyCode == 32){
+    if (box == 5) {
       design1() //PONTOS SOMA, PENSAMENTO - CERTO
     }
+  }
   else
-  if (time < 4000) {
-    design2() //PENSAMENTO - ERRADO
-  } else
-    time = 0
-  if (keyCode == 83 && q1 == 5) //PROXIMA FASE
+    if (time < 4000)
+      design2() //PENSAMENTO - ERRADO
+    else
+      time = 0
+  if (keyCode == 83 && box == 5) //PROXIMA FASE
     cena = 4
 
 
@@ -294,7 +296,7 @@ function fase1() {
 }
 function fase2() {
   if (x1 != 1) //x1 por tela ser para executar um vez, o mesmo para sonsON
-    XP = 12000, x = 30, y = 450, q1 = 0, sonsON = undefined, x1 = 1, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 02
+    XP = 12000, x = 30, y = 450, box = 0, sonsON = undefined, x1 = 1, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 02
   //TELA
   design0()
   text(': SHREK VIROU CAMINHONEIRO ELE PRECISA DE 3+3+3 CAIXAS VOCÊ\nPODE AJUDA-LO?', 170, 34)
@@ -305,7 +307,7 @@ function fase2() {
 
   //RESOLUÇÃO DA QUESTÃO
   if (keyCode == 32)
-    if (q1 == 9) {
+    if (box == 9) {
       design1()
     }
   else
@@ -313,7 +315,7 @@ function fase2() {
     design2()
   } else
     time = 0
-  if (keyCode == 83 && q1 == 9)
+  if (keyCode == 83 && box == 9)
     cena = 5
 
   //PLAYER
@@ -322,7 +324,7 @@ function fase2() {
 }
 function fase3() {
   if (x1 != 2)
-    XP = 12000, x = 30, y = 450, q1 = 0, sonsON = undefined, x1 = 2, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 03
+    XP = 12000, x = 30, y = 450, box = 0, sonsON = undefined, x1 = 2, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 03
   design0()
   text(': O BATIMAM COMPROU 12-8+2 CAIXAS COM BAT-EQUIPAMENTOS,\nQUANTAS CAIXAS DEVEM SER COLOCADAS NO CAMINHÃO?', 170, 34)
   textSize(13)
@@ -333,7 +335,7 @@ function fase3() {
 
   //RESOLUÇÃO DA QUESTÃO
   if (keyCode == 32)
-    if (q1 == 6) {
+    if (box == 6) {
       design1()
     }
   else
@@ -341,7 +343,7 @@ function fase3() {
     design2()
   } else
     time = 0
-  if (keyCode == 83 && q1 == 6)
+  if (keyCode == 83 && box == 6)
     cena = 6
 
 
@@ -351,7 +353,7 @@ function fase3() {
 }
 function fase4() {
   if (x1 != 3)
-    XP = 12000, x = 30, y = 450, q1 = 0, sonsON = undefined, x1 = 3, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 04
+    XP = 12000, x = 30, y = 450, box = 0, sonsON = undefined, x1 = 3, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 04
   design0()
   text(': UM LOJA DE CAIXAS COMPROU 12+12-12 CAIXAS, QUANTAS CAIXAS\nDEVEM IR NO CAMINHÃO?', 170, 34)
   textSize(13)
@@ -361,7 +363,7 @@ function fase4() {
 
   //RESOLUÇÃO DA QUESTÃO
   if (keyCode == 32)
-    if (q1 == 12) {
+    if (box == 12) {
       design1()
     }
   else
@@ -369,7 +371,7 @@ function fase4() {
     design2()
   } else
     time = 0
-  if (keyCode == 83 && q1 == 12)
+  if (keyCode == 83 && box == 12)
     cena = 7
 
   //PLAYER
@@ -377,7 +379,7 @@ function fase4() {
 }
 function fase5() {
   if (x1 != 4)
-    XP = 12000, x = 30, y = 450, q1 = 0, sonsON = undefined, x1 = 4, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 05
+    XP = 12000, x = 30, y = 450, box = 0, sonsON = undefined, x1 = 4, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 05
   design0()
   text(': UMA FAMILIA DE ZUMBI COMPROU 9-2-4+7 CAIXAS COM CEREBROS\nENLATADOS, QUANTAS CAIXAS DEVEM IR NO CAMINHÃO?', 170, 34)
   textSize(13)
@@ -387,7 +389,7 @@ function fase5() {
 
   //RESOLUÇÃO DA QUESTÃO
   if (keyCode == 32)
-    if (q1 == 10) {
+    if (box == 10) {
       design1()
     }
   else
@@ -395,7 +397,7 @@ function fase5() {
     design2()
   } else
     time = 0
-  if (keyCode == 83 && q1 == 10)
+  if (keyCode == 83 && box == 10)
     cena = 8
 
   //PLAYER
@@ -403,7 +405,7 @@ function fase5() {
 }
 function fase6() {
   if (x1 != 5)
-    XP = 12000, x = 30, y = 450, q1 = 0, sonsON = undefined, x1 = 5, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 06
+    XP = 12000, x = 30, y = 450, box = 0, sonsON = undefined, x1 = 5, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 06
   design0()
   text(': A BARBIE COMPROU METADE DE 6 (OU 6/2) CAIXAS DE SAPATOS,\n QUANTAS CAIXAS SÃO?', 170, 34)
   textSize(13)
@@ -413,7 +415,7 @@ function fase6() {
 
   //RESOLUÇÃO DA QUESTÃO
   if (keyCode == 32)
-    if (q1 == 3) {
+    if (box == 3) {
       design1()
     }
   else
@@ -421,7 +423,7 @@ function fase6() {
     design2()
   } else
     time = 0
-  if (keyCode == 83 && q1 == 3)
+  if (keyCode == 83 && box == 3)
     cena = 9
 
 
@@ -431,7 +433,7 @@ function fase6() {
 }
 function fase7() {
   if (x1 != 6)
-    XP = 12000, x = 30, y = 450, q1 = 0, sonsON = undefined, x1 = 6, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 07
+    XP = 12000, x = 30, y = 450, box = 0, sonsON = undefined, x1 = 6, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 07
   design0()
   text(': GOHAN COMPROU 8 DIVIDIDO POR 4 (OU 8/4) CAIXAS COM CARNE DE\nDINOSSAURO QUANTAS CAIXAS DE CARNE SÃO?', 170, 34)
   textSize(13)
@@ -441,7 +443,7 @@ function fase7() {
 
   //RESOLUÇÃO DA QUESTÃO
   if (keyCode == 32)
-    if (q1 == 2) {
+    if (box == 2) {
       design1()
     }
   else
@@ -449,7 +451,7 @@ function fase7() {
     design2()
   } else
     time = 0
-  if (keyCode == 83 && q1 == 2)
+  if (keyCode == 83 && box == 2)
     cena = 10
 
   //PLAYER
@@ -458,7 +460,7 @@ function fase7() {
 }
 function fase8() {
   if (x1 != 7)
-    XP = 12000, x = 30, y = 450, q1 = 0, sonsON = undefined, x1 = 7, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 08
+    XP = 12000, x = 30, y = 450, box = 0, sonsON = undefined, x1 = 7, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 08
   design0()
   text(': UM UPALUPA COMPROU 20/4 CAIXAS DE CHOCOLATE\nQUANTAS CAIXAS SÃO?', 170, 34)
   textSize(13)
@@ -468,7 +470,7 @@ function fase8() {
 
   //RESOLUÇÃO DA QUESTÃO
   if (keyCode == 32)
-    if (q1 == 5) {
+    if (box == 5) {
       design1()
     }
   else
@@ -476,7 +478,7 @@ function fase8() {
     design2()
   } else
     time = 0
-  if (keyCode == 83 && q1 == 5)
+  if (keyCode == 83 && box == 5)
     cena = 11
 
   //PLAYER
@@ -485,7 +487,7 @@ function fase8() {
 }
 function fase9() {
   if (x1 != 8)
-    XP = 12000, x = 30, y = 450, q1 = 0, sonsON = undefined, x1 = 8, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 09
+    XP = 12000, x = 30, y = 450, box = 0, sonsON = undefined, x1 = 8, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 09
   design0()
   text(': A GALINHA PINTADINHA COMPROU 30/5 CAIXAS COM MILHO, QUANTAS\nCAIXAS SÃO?', 170, 34)
   textSize(13)
@@ -494,7 +496,7 @@ function fase9() {
 
   //RESOLUÇÃO DA QUESTÃO
   if (keyCode == 32)
-    if (q1 == 6) {
+    if (box == 6) {
       design1()
     }
   else
@@ -502,7 +504,7 @@ function fase9() {
     design2()
   } else
     time = 0
-  if (keyCode == 83 && q1 == 6)
+  if (keyCode == 83 && box == 6)
     cena = 12
 
   //PLAYER
@@ -511,7 +513,7 @@ function fase9() {
 }
 function fase10() {
   if (x1 != 9)
-    XP = 12000, x = 30, y = 450, q1 = 0, sonsON = undefined, x1 = 9, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 10
+    XP = 12000, x = 30, y = 450, box = 0, sonsON = undefined, x1 = 9, player = l[1], caixa = 0, sons[4].setVolume(0.08), inimigoON = 1, xi = 320, yi = 500, xi0 = 730, yi0 = 350, questaoatual = 10
   design0()
   text(': O CHAVEZ ACHOU 20 REAIS E COMPROU 21/3 CAIXAS COM\nSANDUICHE DE PRESUNTO, QUANTAS CAIXAS SÃO?', 170, 34)
   textSize(13)
@@ -521,7 +523,7 @@ function fase10() {
 
   //RESOLUÇÃO DA QUESTÃO
   if (keyCode == 32)
-    if (q1 == 7) {
+    if (box == 7) {
       design1()
     }
   else
@@ -529,7 +531,7 @@ function fase10() {
     design2()
   } else
     time = 0
-  if (keyCode == 83 && q1 == 7)
+  if (keyCode == 83 && box == 7)
     cena = 100
 
   //PLAYER
@@ -637,9 +639,9 @@ function base() {
   if (keyCode == 90 && x >= 5 && x <= 195 && y < 360 && caixa == 0) //PEGA CAIXA - DEPOSITO
     caixa = 1, player = upc[1], sons[7].setVolume(0.6), sons[7].play()
   if (keyCode == 90 && x >= 705 && y <= 435 && caixa == 1) //SOLTA CAIXA - CAMINHÃO
-    caixa = 0, q1++, player = right[1], sons[6].setVolume(0.6), sons[6].play()
-  if (keyCode == 88 && x >= 705 && y <= 435 && caixa == 0 && q1 > 0) //PEGA CAIXA - CAMINHÃO
-    caixa = 1, q1--, player = rightc[1], sons[7].play()
+    caixa = 0, box++, player = right[1], sons[6].setVolume(0.6), sons[6].play()
+  if (keyCode == 88 && x >= 705 && y <= 435 && caixa == 0 && box > 0) //PEGA CAIXA - CAMINHÃO
+    caixa = 1, box--, player = rightc[1], sons[7].play()
   if (keyCode == 88 && x >= 5 && x <= 195 && y < 360 && caixa == 1) //SOLTA CAIXA DEPOSITO
     caixa = 0, player = up[1], sons[6].play()
 
@@ -781,7 +783,7 @@ function design0() {
   fill('grey');
   stroke('black');
   strokeWeight(1);
-  if (q1 >= 10) //CIRCULO DO CONTADOR DO CAMINHÃO
+  if (box >= 10) //CIRCULO DO CONTADOR DO CAMINHÃO
     rect(838, 400, 70, 40, 6) //CIRCULO
   else
     rect(838, 400, 40, 40, 20) //QUADRADO
@@ -797,7 +799,7 @@ function design0() {
   text('Caixas no\ncaminhão:', 823, 367)
   fill('blue')
   textSize(32)
-  text(q1, 850, 430) //CONTADOR CAIXAS
+  text(box, 850, 430) //CONTADOR CAIXAS
   fill('black')
   textSize(16)
   text('Questão ', 80, 34)
