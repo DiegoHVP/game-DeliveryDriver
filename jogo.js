@@ -270,23 +270,20 @@ function fase1() {
   text('Pressione Z para pegar a caixa no deposito.\nPressione X para pegar as caixas que já estão no caminhão.\nPressione ESPAÇO para verificar a resposta.', 510, 145)
 
 
-  if (keyCode == 81)
-    cena = 100
-
+  
   base(); //CONTROLE, SPRITES, CONDIÇÕES, TEMPO, INIMIGO
 
 
   //RESOLUÇÃO DA QUESTÃO
-  if (keyCode == 32){
+  if (keyCode == 32)
     if (box == 5) {
       design1() //PONTOS SOMA, PENSAMENTO - CERTO
     }
-  }
   else
-    if (time < 4000)
-      design2() //PENSAMENTO - ERRADO
-    else
-      time = 0
+  if (time < 4000) {
+    design2() //PENSAMENTO - ERRADO
+  } else
+    time = 0
   if (keyCode == 83 && box == 5) //PROXIMA FASE
     cena = 4
 
