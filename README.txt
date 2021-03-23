@@ -3,8 +3,6 @@ PS: Pagina para testes
 
 Jogo - Entregador de Mercadorias
 
-https://bit.ly/39WKe4c
-
 SONS USADOS:
 UNDERTALE
  -Nyeh Heh Heh! (Intro) + Bonetrousle Extended
