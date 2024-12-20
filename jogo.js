@@ -607,13 +607,13 @@ function base() {
       sons[7].play();
     } else if (keyCode === 90 && x >= 705 && y <= 435 && caixaNasMaos === 1) { // SOLTA CAIXA - CAMINHÃO
       caixaNasMaos = 0;
-      boxCount++; // Incrementa a contagem de caixas
+      caixaNoCaminhao++; // Incrementa a contagem de caixas
       player = right[1];
       sons[6].setVolume(0.6);
       sons[6].play();
-    } else if (keyCode === 88 && x >= 705 && y <= 435 && caixaNasMaos === 0 && boxCount > 0) { // PEGA CAIXA - CAMINHÃO
+    } else if (keyCode === 88 && x >= 705 && y <= 435 && caixaNasMaos === 0 && caixaNoCaminhao > 0) { // PEGA CAIXA - CAMINHÃO
       caixaNasMaos = 1;
-      boxCount--; // Decrementa a contagem de caixas
+      caixaNoCaminhao--; // Decrementa a contagem de caixas
       player = rightc[1];
       sons[7].play();
     } else if (keyCode === 88 && x >= 5 && x <= 195 && y < 360 && caixaNasMaos === 1) { // SOLTA CAIXA - DEPÓSITO
@@ -627,12 +627,12 @@ function base() {
   if (keyIsDown(LEFT_ARROW) && x > 0) {
     x -= Speed; // MOVIMENTO ESQUERDA
     countframe++;
-    player = caixaNasMaos === 0 ? right[FR] : rightc[FR];
+    player = caixaNasMaos === 0 ? left[FR] : leftc[FR];
   }
   if (keyIsDown(RIGHT_ARROW) && x < 730) {
     x += Speed; // MOVIMENTO DIREITA
     countframe++;
-    player = caixaNasMaos === 0 ? left[FR] : leftc[FR];
+    player = caixaNasMaos === 0 ? right[FR] : rightc[FR];
   }
   if (keyIsDown(UP_ARROW) && y > 350) {
     y -= Speed; // MOVIMENTO PARA CIMA
@@ -667,75 +667,55 @@ function base() {
     cena = 99;
   }
 
-
-  ///////////////////INIMIGO//////////////////////////
-  if (inimigoON == 1) { //SE INIMIGO ATIVO
-    if (xi < x)
-      xi += 2
-    if (xi > x)
-      xi -= 2
-    if (yi > y)
-      yi -= 1
-    if (yi < y)
-      yi += 1
-    if (xi < 120 + x && xi > x - 90 && yi < 40 + y && yi > y - 60) //DANO
-      XP -= 10.5, paint0 = 1
-    else
-      paint0 = 0
-    dance0 = parseInt(random(xi + 25, xi + 65))
-    dance1 = parseInt(random(xi + 25, xi + 65))
+  // INIMIGO
+  if (inimigoON == 1) { // SE INIMIGO ATIVO
+    if (xi < x) xi += 2;
+    if (xi > x) xi -= 2;
+    if (yi > y) yi -= 1;
+    if (yi < y) yi += 1;
+    if (xi < 120 + x && xi > x - 90 && yi < 40 + y && yi > y - 60) XP -= 10.5, paint0 = 1;
+    else paint0 = 0;
+    dance0 = parseInt(random(xi + 25, xi + 65));
+    dance1 = parseInt(random(xi + 25, xi + 65));
   }
-  fill(255)
-  ellipse(xi + 45, yi + 40, 40, 40) //CABEÇA
-  rect(xi + 25, yi + 55, 40, 80) //CORPO
-  ellipse(dance1, yi + 130, 15, 20) //PE
-  ellipse(dance0, yi + 130, 15, 20) //PE
-  if (xi < 160 + x && xi > x - 90)  //COR OLHO
-    fill(0, 255, 0), paint0 = 1
-  else
-    fill(20)
-  if (inimigoON == 0)  //INIMIGO DESATIIVADO
-    fill('yellow'), dance0 = xi + 25, dance1 = xi + 65
-  ellipse(xi + 45, yi + 40, 20, 20) //OLHO
+  fill(255);
+  ellipse(xi + 45, yi + 40, 40, 40); // CABEÇA
+  rect(xi + 25, yi + 55, 40, 80); // CORPO
+  ellipse(dance1, yi + 130, 15, 20); // PE
+  ellipse(dance0, yi + 130, 15, 20); // PE
+  if (xi < 160 + x && xi > x - 90) fill(0, 255, 0), paint0 = 1;
+  else fill(20);
+  if (inimigoON == 0) fill('yellow'), dance0 = xi + 25, dance1 = xi + 65;
+  ellipse(xi + 45, yi + 40, 20, 20); // OLHO
 
-
-  ///////////2° INIMIGO//////////////////
+  // 2° INIMIGO
   if ((questaoatual >= 3 && questaoatual < 5) || (questaoatual > 6)) {
-    if (inimigoON == 1) { //SE  ESTA INIMIGO ATIVO
-      if (xi0 < x)
-        xi0 += 4
-      if (xi0 > x)
-        xi0 -= 4
-      if (yi0 > y)
-        yi0 -= 4
-      if (yi0 < y)
-        yi0 += 4
-      if (xi0 < 120 + x && xi0 > x - 90 && yi0 < 40 + y && yi0 > y - 60) //DANO NOS PONTOS
-        pontos[stage] -= 0.1, paint1 = 1
-      dance = parseInt(random(xi0 + 25, xi0 + 65)) //POSIÇÃO PE
-      dance11 = parseInt(random(xi0 + 25, xi0 + 65)) //POSIÇÃO PE
+    if (inimigoON == 1) { // SE ESTA INIMIGO ATIVO
+      if (xi0 < x) xi0 += 4;
+      if (xi0 > x) xi0 -= 4;
+      if (yi0 > y) yi0 -= 4;
+      if (yi0 < y) yi0 += 4;
+      if (xi0 < 120 + x && xi0 > x - 90 && yi0 < 40 + y && yi0 > y - 60) pontos[stage] -= 0.1, paint1 = 1;
+      dance = parseInt(random(xi0 + 25, xi0 + 65)); // POSIÇÃO PE
+      dance11 = parseInt(random(xi0 + 25, xi0 + 65)); // POSIÇÃO PE
     }
 
-    fill(255)
-    ellipse(xi0 + 45, yi0 + 40, 40, 40) //CABEÇA
-    rect(xi0 + 25, yi0 + 55, 40, 80) //CORPO
-    ellipse(dance11, yi0 + 130, 15, 20) //PE
-    ellipse(dance, yi0 + 130, 15, 20) //PE
-    if (xi0 < 160 + x && xi0 > x - 90) //COR OLHO
-      fill('red')
-    else
-      fill(20), paint1 = 0
-    if (inimigoON == 0) //INIMIGO DESATIVADO
-      fill('yellow'), dance = xi0 + 25, dance11 = xi0 + 65
-    ellipse(xi0 + 45, yi0 + 40, 20, 20) //OLHO
-  }
-  ///////////////////////////////////////////////////
-  textSize(14)
-  if (parseInt(pontos[stage]) < -100) {
-    text('ALERT:', 700, 220)
-    text('\nPONTOS EM ESTADO CRÍTICO!!', 610, 220)
+    fill(255);
+    ellipse(xi0 + 45, yi0 + 40, 40, 40); // CABEÇA
+    rect(xi0 + 25, yi0 + 55, 40, 80); // CORPO
+    ellipse(dance11, yi0 + 130, 15, 20); // PE
+    ellipse(dance, yi0 + 130, 15, 20); // PE
+    if (xi0 < 160 + x && xi0 > x - 90) fill('red');
+    else fill(20), paint1 = 0;
+    if (inimigoON == 0) fill('yellow'), dance = xi0 + 25, dance11 = xi0 + 65;
+    ellipse(xi0 + 45, yi0 + 40, 20, 20); // OLHO
   }
 
+  textSize(14);
+  if (parseInt(pontos[stage]) < -100) {
+    text('ALERT:', 700, 220);
+    text('\nPONTOS EM ESTADO CRÍTICO!!', 610, 220);
+  }
 }
 function design0() {
   background(bg);
