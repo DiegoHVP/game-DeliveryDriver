@@ -598,7 +598,6 @@ function intro() {
     cena = 1, sons[2].play()
 }
 function base() {
-  function base() {
     // DETECÇÃO DE TECLAS
     if (keyIsPressed) {
       if (keyCode === 90 && x >= 5 && x <= 195 && y < 360 && caixaNasMaos === 0) { // PEGA CAIXA - DEPÓSITO
