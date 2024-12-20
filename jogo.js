@@ -598,75 +598,75 @@ function intro() {
     cena = 1, sons[2].play()
 }
 function base() {
-  // DETECÇÃO DE TECLAS
-  if (keyIsPressed) {
-    if (keyCode === 90 && x >= 5 && x <= 195 && y < 360 && caixaNasMaos === 0) { // PEGA CAIXA - DEPÓSITO
-      caixaNasMaos = 1;
-      player = upc[1];
-      sons[7].setVolume(0.6);
-      sons[7].play();
-    } else if (keyCode === 90 && x >= 705 && y <= 435 && caixaNasMaos === 1) { // SOLTA CAIXA - CAMINHÃO
-      caixaNasMaos = 0;
-      caixaNoCaminhao++; // Incrementa a contagem de caixas
-      player = right[1];
-      sons[6].setVolume(0.6);
-      sons[6].play();
-    } else if (keyCode === 88 && x >= 705 && y <= 435 && caixaNasMaos === 0 && caixaNoCaminhao > 0) { // PEGA CAIXA - CAMINHÃO
-      caixaNasMaos = 1;
-      caixaNoCaminhao--; // Decrementa a contagem de caixas
-      player = rightc[1];
-      sons[7].play();
-    } else if (keyCode === 88 && x >= 5 && x <= 195 && y < 360 && caixaNasMaos === 1) { // SOLTA CAIXA - DEPÓSITO
-      caixaNasMaos = 0;
-      player = up[1];
-      sons[6].play();
+  function base() {
+    // DETECÇÃO DE TECLAS
+    if (keyIsPressed) {
+      if (keyCode === 90 && x >= 5 && x <= 195 && y < 360 && caixaNasMaos === 0) { // PEGA CAIXA - DEPÓSITO
+        caixaNasMaos = 1;
+        player = upc[1];
+        sons[7].setVolume(0.6);
+        sons[7].play();
+      } else if (keyCode === 90 && x >= 705 && y <= 435 && caixaNasMaos === 1) { // SOLTA CAIXA - CAMINHÃO
+        caixaNasMaos = 0;
+        caixaNoCaminhao++;
+        player = right[1];
+        sons[6].setVolume(0.6);
+        sons[6].play();
+      } else if (keyCode === 88 && x >= 705 && y <= 435 && caixaNasMaos === 0 && caixaNoCaminhao > 0) { // PEGA CAIXA - CAMINHÃO
+        caixaNasMaos = 1;
+        caixaNoCaminhao--;
+        player = rightc[1];
+        sons[7].play();
+      } else if (keyCode === 88 && x >= 5 && x <= 195 && y < 360 && caixaNasMaos === 1) { // SOLTA CAIXA - DEPÓSITO
+        caixaNasMaos = 0;
+        player = up[1];
+        sons[6].play();
+      }
     }
-  }
-
-  // MOVIMENTO E ANIMAÇÕES
-  if (keyIsDown(LEFT_ARROW) && x > 0) {
-    x -= Speed; // MOVIMENTO ESQUERDA
-    countframe++;
-    player = caixaNasMaos === 0 ? left[FR] : leftc[FR];
-  }
-  if (keyIsDown(RIGHT_ARROW) && x < 730) {
-    x += Speed; // MOVIMENTO DIREITA
-    countframe++;
-    player = caixaNasMaos === 0 ? right[FR] : rightc[FR];
-  }
-  if (keyIsDown(UP_ARROW) && y > 350) {
-    y -= Speed; // MOVIMENTO PARA CIMA
-    countframe++;
-    player = caixaNasMaos === 0 ? up[FR] : upc[FR];
-  }
-  if (keyIsDown(DOWN_ARROW) && y < 500) {
-    y += Speed; // MOVIMENTO PARA BAIXO
-    countframe++;
-    player = caixaNasMaos === 0 ? down[FR] : downc[FR];
-  }
-
-  // TEMPO E GAME OVER
-  XP -= 1.5;
-  textSize(22);
-  fill(255);
-  stroke('grey');
-  strokeWeight(3);
-  rect(720, 93, 170, 37, 10); // SCORE
-  rect(20, 93, 145, 37, 10); // TEMPO
-  fill(0);
-  strokeWeight(1);
-  text('Pontos: ' + parseInt(pontos[stage]), 725, 118); // PRINT PONTOS
-
-  if (0 * XP === 0) { // VERIFICA SE XP É UM NÚMERO
-    text('Tempo: ' + parseInt(XP / 100), 26, 118);
-  } else {
-    text('Tempo: STOP', 26, 118);
-  }
-
-  if (parseInt(XP / 100) === 0) { // GAME OVER
-    cena = 99;
-  }
-
+  
+    // MOVIMENTO E ANIMAÇÕES
+    if (keyIsDown(LEFT_ARROW) && x > 0) {
+      x -= Speed; // MOVIMENTO ESQUERDA
+      countframe++;
+      player = caixaNasMaos === 0 ? right[FR] : rightc[FR];
+    }
+    if (keyIsDown(RIGHT_ARROW) && x < 730) {
+      x += Speed; // MOVIMENTO DIREITA
+      countframe++;
+      player = caixaNasMaos === 0 ? left[FR] : leftc[FR];
+    }
+    if (keyIsDown(UP_ARROW) && y > 350) {
+      y -= Speed; // MOVIMENTO PARA CIMA
+      countframe++;
+      player = caixaNasMaos === 0 ? up[FR] : upc[FR];
+    }
+    if (keyIsDown(DOWN_ARROW) && y < 500) {
+      y += Speed; // MOVIMENTO PARA BAIXO
+      countframe++;
+      player = caixaNasMaos === 0 ? down[FR] : downc[FR];
+    }
+  
+    ////// TEMPO E GAME OVER
+    XP -= 1.5;
+    textSize(22);
+    fill(255);
+    stroke('grey');
+    strokeWeight(3);
+    rect(720, 93, 170, 37, 10); // SCORE
+    rect(20, 93, 145, 37, 10); // TEMPO
+    fill(0);
+    strokeWeight(1);
+    text('Pontos: ' + parseInt(pontos[stage]), 725, 118); // PRINT PONTOS
+  
+    if (0 * XP === 0) { // VERIFICA SE XP É UM NÚMERO
+      text('Tempo: ' + parseInt(XP / 100), 26, 118);
+    } else {
+      text('Tempo: STOP', 26, 118);
+    }
+  
+    if (parseInt(XP / 100) === 0) { // GAME OVER
+      cena = 99;
+    }
   // INIMIGO
   if (inimigoON == 1) { // SE INIMIGO ATIVO
     if (xi < x) xi += 2;
